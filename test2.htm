@@ -1,0 +1,97 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="../common/_const_DB.js"></script>
+<script src="../common/default.js"></script>
+<script src="../common/graph.js"></script>
+<script src="./template.js"></script>
+<script src="./nighter.js"></script>
+<style>
+@media screen and (min-width:481px) { 
+	.container {
+		font-size:large;
+		display: grid;
+		grid-template-columns: 0.3fr 1.8fr 1fr;
+		grid-template-rows: 1fr 1fr 1fr;
+		gap: 7px 7px;
+		grid-auto-flow: row;
+		grid-template-areas:
+			"a b c"
+			"a . ."
+			"a . .";
+	}
+}
+@media screen and (max-width:480px) { 
+	input[type="text"]{
+		font-size:xx-small;
+	}
+	.container {
+		background-color:pink;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr 0.5fr 0.5fr;
+		gap: 7px 7px;
+		grid-auto-flow: row;
+		grid-template-areas:
+			"a"
+			"b"
+			"c";
+	}
+}
+#TEST{
+	background-color:blue;
+}
+</style>
+<script language="javascript">
+let tmp=new NIGHTER();
+let a=[];
+let b=[];
+let c;
+const start=()=>{
+//デザインされた配置にあるDIV要素にテンプレートを付与する
+	for(let i=0;i<5;i++){
+		a.push(tmp.import_template(SYOHIN,{"location":"A1"}));
+		a[a.length-1].$hincd("TEST"+(a.length-1));
+	}
+	for(let i=0;i<2;i++){
+		b.push(tmp.import_template(TOKUI,{"location":"A2"}));
+	}
+	c=tmp.import_template(TOKUI,{"location":"A3"});
+/*
+	for(let i=0;i<a.length;i++){
+		a[i].$hincd("TEST"+i);
+	}
+*/
+
+	b[1].$btn1("AAAA");
+
+//各テンプレートに定義された関数の実行
+
+
+	b[0].$tokcd("TOKUI");
+	b[1].$hincd("SYOHIN");
+
+	c.$tokcd("TOKUI2");
+	c.$hincd("SYOHIN2");
+
+console.log(b[1].$hincd());
+console.log(c.$tokcd());
+/*
+	tmp.getNode(c,"hincd").addEventListener("change",function(){
+		c["class"].getHinname(c[0],this.value);
+	});
+*/
+}
+
+</script>
+</head>
+<body onload="start();">
+<div class="container">
+  <div id="A1" style="border:solid 1px green; grid-area:a;"></div>
+  <div id="A2" style="border:solid 1px red; grid-area:b;"></div>
+  <div id="A3" style="border:solid 1px blue; grid-area:c;"></div>
+</div>
+</body>
+</html>
+
