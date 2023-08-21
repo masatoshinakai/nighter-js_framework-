@@ -147,8 +147,10 @@ TOKUI["CLASS"] = class {
 	}
 */
 	hincd_change(st,hincd){
-		let sql="";
-		sql+=" select HINNM from PrintMeijin.dbo.M_SYOHIN where HINCD='"+hincd+"'";
+		const SEVER = "http://192.168.0.xxx:8080/";	//<--HttpSqlServerの設置先
+		const DB = "Server=192.168.0.xx;database=<<DB名>>";	//<--MS-sqlserverの設置先とDB名
+	let sql="";
+		sql+=" select HINNM from dbo.M_SYOHIN where HINCD='"+hincd+"'";
 
 		var kekka=httpresp(null,SEVER,sql,DB,true);
 		if(kekka===undefined){
