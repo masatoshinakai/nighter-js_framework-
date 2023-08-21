@@ -1,0 +1,230 @@
+リリース情報
+Microsoft JDBC Driver 8.4 for SQL Server
+2020 年 8 月
+
+------------
+概要
+------------
+このファイルには、Microsoft JDBC Driver 8.4 for SQL Server のドキュメントを補完する最新情報やその他の重要な情報 
+が含まれています。JDBC Driver をインストールする前に、このファイルを 
+よくお読みください。
+
+Microsoft はお客様のフィードバックを重要なご提案として受け止め、 
+迅速な対応に努めています。JDBC Driver のブログとオンライン フォーラムを使用して、フィードバックをお送りいただく方法については、
+Microsoft JDBC Driver 8.4 for SQL Server のページ (https://aka.ms/mssql-jdbc-feedback) を参照してください
+
+
+------------
+インストール
+------------
+JDBC Driver のインストール手順は install.txt に記載されています。Windows と Unix オペレーティング システムに JDBC Driver をインストールする場合の詳細については、 
+そのファイルを参照してください。
+
+
+---------------------------
+サポートされるオペレーティング システム
+---------------------------
+Microsoft JDBC Driver 8.4 for SQL Server は、以下のオペレーティング システムをサポートします。
+  Windows Server 2012
+  Windows Server 2012 R2
+  Windows Server 2016
+  Windows Server 2019
+  Windows 8.1
+  Windows 10
+  Linux
+  macOS
+
+上記のリストは、サポートされているオペレーティング システムの例の一部です。JDBC Driver は、 
+Java 仮想マシン (JVM) の使用をサポートするすべてのオペレーティング システムで機能するように設計されています。
+
+ただし、互換性とサポートの可否がテストされているのは、Linux と MacOS の最新のオペレーティング システム (Ubuntu 20.04、Ubuntu 18.04、CentOS 7、SUSE 12、
+ macOS 10.15) のみです。
+
+
+-----------------------
+サポートされる JAVA バージョン
+-----------------------
+Microsoft JDBC Driver 8.4 for SQL Server はテスト済みであり、前述のサポート対象のオペレーティング システム上での Open JDK と Zulu の最新バージョンの Java 
+Development Kit (JDK) ビルドをサポートしています。
+Java Runtime Environment (JRE) システム ライブラリの次のファミリ バージョンをサポートしています。
+
+  ----------------------------------------------------------------------
+  JRE ファミリ バージョン | 最大限のサポートのための JAR ドライバー
+  ----------------------------------------------------------------------
+  8+                 | mssql-jdbc-8.4.1.jre8.jar
+  11+                | mssql-jdbc-8.4.1.jre11.jar
+  14+                | mssql-jdbc-8.4.1.jre14.jar
+
+
+----------------
+リリース内容
+----------------
+Microsoft JDBC Driver 8.4 for SQL Server の zip ファイルまたは tar ファイルは、 
+選択したインストール ディレクトリを基準にした特定の場所に次のファイルをアンパックします。
+
+<インストール ディレクトリ>\sqljdbc_<バージョン>\<言語>\install.txt
+<インストール ディレクトリ>\sqljdbc_<バージョン>\<言語>\release.txt
+<インストール ディレクトリ>\sqljdbc_<バージョン>\<言語>\license.txt
+<インストール ディレクトリ>\sqljdbc_<バージョン>\<言語>\thirdpartynotices.txt
+<インストール ディレクトリ>\sqljdbc_<バージョン>\<言語>\mssql-jdbc-8.4.1.jre8.jar
+<インストール ディレクトリ>\sqljdbc_<バージョン>\<言語>\mssql-jdbc-8.4.1.jre11.jar
+<インストール ディレクトリ>\sqljdbc_<バージョン>\<言語>\mssql-jdbc-8.4.1.jre14.jar
+<インストール ディレクトリ>\sqljdbc_<バージョン>\<言語>\auth\x86\mssql-jdbc_auth-8.4.1.x86.dll
+<インストール ディレクトリ>\sqljdbc_<バージョン>\<言語>\auth\x64\mssql-jdbc_auth-8.4.1.x64.dll
+<インストール ディレクトリ>\sqljdbc_<バージョン>\<言語>\samples\<サンプル ファイル...>
+<インストール ディレクトリ>\sqljdbc_<バージョン>\<言語>\xa\xa_install.sql
+<インストール ディレクトリ>\sqljdbc_<バージョン>\<言語>\xa\x86\sqljdbc_xa.dll
+<インストール ディレクトリ>\sqljdbc_<バージョン>\<言語>\xa\x64\sqljdbc_xa.dll
+
+各コンポーネントの詳細については、次のオンライン ドキュメントを参照してください。
+Microsoft JDBC Driver for SQL Server のドキュメント: https://aka.ms/mssql-jdbc
+
+
+-------------
+ドキュメント
+-------------
+このパッケージには、このリリース情報、インストール手順、ライセンス条項が含まれています。
+他のドキュメントはすべてオンラインで提供されます。
+
+オフラインのヘルプ ファイルの提供は、中止されていることに注意してください。
+
+
+---------
+JAR ファイル
+---------
+下位互換性と将来のアップグレード シナリオをサポートするために、JDBC Driver 8.4 では 
+次の 3 つの JAR クラス ライブラリが各インストール パッケージに収録されています。
+	mssql-jdbc-8.4.1.jre8.jar
+	mssql-jdbc-8.4.1.jre11.jar
+	mssql-jdbc-8.4.1.jre14.jar
+
+
+----------------------
+機能に固有のファイル
+----------------------
+Azure Active Directory と統合認証 (Windows 上) のコンポーネントは、 
+'auth' ディレクトリにあります。
+
+JDBC 分散トランザクションのコンポーネントは xa ディレクトリにあります。
+
+
+--------------------
+機能の依存関係
+--------------------
+Microsoft JDBC Driver 8.4 for SQL Server の機能の中には、下記の外部ライブラリに 
+依存するものがあります。
+
+1.Always Encrypted を Azure Key Vault Provider とともに使用する
+   依存するライブラリ: azure-keyvault (バージョン 1.2.4)、adal4j (バージョン 1.6.5)、
+   および client-runtime (バージョン 1.7.4)
+
+2.'セキュリティで保護されたエンクレーブが設定された Always Encrypted' を使用する
+   依存するライブラリ: com.google.code.gson (バージョン 2.8.6)、
+   および org.bouncycastle (バージョン 1.65)。org.bouncycastle は JDK 8 の場合にのみ必要です。
+ 
+3.'Azure Active Directory 統合認証' を Windows、Linux、macOS オペレーティング システムで使用する
+   依存するライブラリ: adal4j (バージョン 1.6.5)、および client-runtime (バージョン 1.7.4)
+   
+4.'useFmtOnly' を使用してパラメーターのメタデータを取得する
+   依存するライブラリ: antlr-runtime (バージョン 4.7.2)
+   
+標準の Java アプリケーションまたは Maven アプリケーションに含まれるこれらの依存ライブラリに関する詳細情報は、 
+https://go.microsoft.com/fwlink/?linkid=867575 から確認できます。
+
+-------
+SAMPLES
+-------
+JDBC Driver の各種機能を示すサンプル アプリケーションは、
+"sample" ディレクトリに含まれています。各サンプルとその実行方法の詳細については、オンライン  
+ドキュメントを参照してください。
+
+
+-----------
+変更一覧
+-----------
+8.4.0.0 から 8.4.1.0 への変更:
+- `SQLServerConnectionPoolProxy` に `delayLoadingLobs` との互換性がないという問題が修正されました。
+- `delayLoadingLobs` との `NullPointerException` の潜在的な問題が修正されました。
+- Windows 証明書ストアを使用した列暗号化キーの暗号化解除の問題が修正されました。
+
+8.2.2.0 から 8.4.0.0 への変更:
+- SQL データの検出と分類を使用するときの秘密度ランクのサポートが追加されました。
+- データベース互換レベルを返す 'SQLServerDatabaseMetaData.getDatabaseCompatibilityLevel()' API が追加されました。
+- Azure SQL DNS キャッシュのサポートが追加されました。
+- 'SQLServerConnection.commit()' に遅延持続性オプションが追加されました。
+- セキュリティで保護されたエンクレーブが設定された Always Encrypted 機能を使用するときの証明書の有効期限の検証が追加されました。
+- 接続が終了したときの例外について SQL の状態が追加されました。
+- カスタム SocketFactory を指定する接続プロパティが追加されました。
+- クライアント証明書の認証のサポートが追加されました。
+- JAVA 14 のサポートが追加されました。
+- マネージド ID を使用した Azure Key Vault への認証のサポートが追加されました。
+- 1.2 よりも前の TLS バージョンがネゴシエートされるときに警告をスローするようにドライバーが更新されました。
+- CSV ファイルからの読み込みで一括コピーを使用するときに区切り記号と二重引用符をエスケープするために 'SQLServerBulkCSVFileRecord.setEscapeColumnDelimitersCSV()' が導入されました。
+- Azure Data Warehouse に対する拡張された一括コピーのサポートが導入されました。
+- LOB のストリーミング時に下位互換性を提供するために 'delayLoadingLobs' 接続プロパティが導入されました。
+
+ バグの修正:
+- 'DatabaseMetaData.getColumns()' が断続的にテーブル列の説明を不適切な順序で返す問題が修正されました。
+- Always Encrypted が有効になっている場合の空間データ型キャスト エラーの問題が修正されました。
+- 'DatabaseMetaData.getColumns()' が Azure データ ウェアハウスに対して IS_AUTOINCREMENT と IS_GENERATEDCOLUMN の適切な型を返さない問題が修正されました。
+- 'Geography.STAsBinary()' と 'Geometry.STAsBinary()' が CLR 形式ではなく WKB 形式を返す問題が修正されました。
+- MSSQL 以外の ResultSets が 'DateTimeOffset' を一括コピーする問題が修正されました。
+- SonarQube によって識別された問題が修正されました。
+- Always Encrypted が有効になっているときにバッチ挿入が失敗する問題が修正されました。
+- 有効期限の日付形式が一致しないために MSI 認証が失敗する問題が修正されました。
+-セキュリティで保護されたエンクレーブが設定された Always Encrypted 機能を使用するときにストリームが終了されない問題が修正されました。
+- 基になる型として SQL VARIANT を取得する際の問題が修正されました。
+- ドライバーが JAVA 8 に準拠していない問題が修正されました。
+- 大きな空間データ型を挿入するときの 'PreparedStatement' の問題が修正されました。
+- 接続文字列内の中かっこをエスケープする際の問題が修正されました。
+- 分散トランザクションの使用時に SQL Server Linux からオペレーティング システム情報を取得するときの警告が修正されました。
+
+強化機能:
+- 'SQLServerDataTable' から TVP 名を取得する 'SQLServerPreparedStatement.setObject()' が更新されました。
+- リダイレクト対応 Azure サーバーに接続するときの例外メッセージが改善されました。
+- 接続文字列の解析時のパフォーマンスが向上しました。
+-Always Encrypted エンクレーブのキャッシュ キーにデータベース名が追加されました。
+- 未使用のコードが削除されました。
+
+------------
+既知のイシュー
+------------
+Microsoft JDBC Driver 8.4 for SQL Server に関する既知の問題には、次のものがあります。
+
+1) SQL Azure との接続の終了
+
+SQL Azure への接続時に非アクティブな状態が一定時間続くと、 
+ファイアウォールなどのネットワーク コンポーネントにより、アイドル接続が終了されることがあります。ネットワーク コンポーネントによりアイドル状態の接続をドロップしないようにするには、
+次のレジストリ設定 (または Windows 以外の同等のもの) を 
+ドライバーが読み込まれるオペレーティング システムに設定する必要があります。
+           
+レジストリ設定                                                                   推奨値
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\KeepAliveTime            30000
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\KeepAliveInterval         1000
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\TcpMaxDataRetransmission  10
+
+2) TVP を sql_variant とともに使用するとき 
+
+2.a) 日付の値
+
+sql_variant 列に格納された datetime/smalldatetime/date の値を含むテーブルの入力で TVP を使用すると、
+ResultSet 上で getDateTime()/getSmallDateTime()/getDate() を呼び出しても機能せず、次の例外がスローされます。
+
+	java.lang.Stringをjava.sql.Timestampにキャストすることはできません
+
+回避策: getString() または getObject() を代わりに使用します。
+
+2.b) TVP を NULL 値の sql_variant とともに使用する
+
+TVP を使用してテーブルを入力し、NULL 値を sql_variant 列の型に送信すると、
+TVP では現在、列の型 sql_variant での NULL 値の挿入がサポートされていないため、例外が発生します。
+
+
+3) NTLM 認証を使用するとき
+
+現在、拡張保護と暗号化された接続を同時に有効化することはできません。
+
+4) useFmtOnly を使用するとき
+
+SQL の解析ロジックの欠陥に起因する、いくつかの機能のイシューがあります。
+詳細と回避策の提案については、https://aka.ms/mssql-jdbc-usefmtonly をご覧ください。

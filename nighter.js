@@ -253,3 +253,88 @@ NIGHTER = class {
 		}
 	}
 }
+function httpresp(ele,url,sql,db,winflg,params){
+
+	var ret=[];
+	let noDataFlg=false;
+	winflg = true;
+	if(!winflg){
+		var win1=window.open('','','toolbar=no,menubar=no,location=no,status=no,top=200,left=200,width=300,height=50');
+		win1.document.write("<center><font size=5>データ検索中です。<br>お待ちください。</font></center>");
+	}
+	if(params!==undefined){
+		if(params["noDataSet"]!==undefined){
+			noDataFlg=true;
+		}
+	}
+	var httpReq = new XMLHttpRequest();
+	httpReq.abort();
+	httpReq.open('POST',url, false);
+	if(Object.prototype.toString.call(sql) === '[object Array]'){
+		if(sql.length==1){
+			httpReq.send('SQL=' + encodeURIComponent(sql[0]) + '&DB=' + encodeURIComponent(db));
+		}else{
+			var tsql="";
+			for(var j=0;j<sql.length;j++){
+				tsql+="SQL"+j+"="+encodeURIComponent(sql[j])+"&";
+			}
+			httpReq.send(tsql + 'DB=' + encodeURIComponent(db));
+		}
+	}else{
+		httpReq.send('SQL=' + encodeURIComponent(sql) + '&DB=' + encodeURIComponent(db));
+	}
+	var data=httpReq.responseText;
+	var stat=httpReq.status;
+	if(!winflg){
+		if(!win1.closed){
+			win1.close();
+		}
+	}
+	if(stat==500){
+		return ErrorCord.SERVERERROR;
+	}
+	if(data==""){
+		SP=false;
+		return undefined;
+	}else{
+		if(data.substr(0,1)=="!"){
+			alert(data);
+			return ErrorCord.SQLERROR;
+		}
+		var retm=data.split("#,#");
+		data="";
+		var wk=retm[1];
+		if(typeof(wk)=="undefined"){
+			if(!noDataFlg){
+				return wk;
+			}else{
+				for(var i=0;i<retm[0].split("#!#").length;i++){
+					var retw=[];
+					ret[i]=retw;
+				}
+				var rets=retm[0].split("#!#");
+				for(var j=0;j<rets.length;j++){
+					ret[j][0]=rets[j];
+					ret[j][1]="";
+				}
+				retm="";
+				rets="";
+				return ret;
+				}
+		}else{
+			for(var i=0;i<wk.split("#!#").length;i++){
+				var retw=[];
+				ret[i]=retw;
+			}
+			for(var i=0;i<retm.length;i++){
+				var rets=retm[i].split("#!#");
+				for(var j=0;j<rets.length;j++){
+					ret[j][i]=rets[j];
+				}
+			}
+			retm="";
+			rets="";
+			return ret;
+		}
+	}
+}
