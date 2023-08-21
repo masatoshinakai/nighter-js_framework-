@@ -75,8 +75,8 @@ SYOHIN["CLASS"] = class {
 		toNode.value=ftomNode.value;
 	}
 	hincd_change(st,hincd){
-		const SEVER = "http://192.168.0.168:8080/";
-		const DB = "Server=192.168.0.10;database=PrintMeijin";
+		const SEVER = "http://192.168.0.xxx:8080/";	//<--HttpSqlServerの設置先
+		const DB = "Server=192.168.0.xx;database=<<DB名>>";	//<--MS-sqlserverの設置先とDB名
 
 		let nig=new NIGHTER();
 		let sql="";
