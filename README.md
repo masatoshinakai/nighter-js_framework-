@@ -7,3 +7,4 @@ javascript 簡易フレームワーク。ｗｅｂデザインというよりは
 test2.htm     ....実行用HTML
 template.js   ....テンプレートひな型
 nighter.js    ....本体
+HttpSqlServer.java  .... MS-sqlserverとの連携を行う場合は起動が必要
