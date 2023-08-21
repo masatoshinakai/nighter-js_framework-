@@ -82,7 +82,7 @@ SYOHIN["CLASS"] = class {
 		let sql="";
 		hincd=nig.convNumeric(hincd);
 		this.node.querySelector("#hincd").value=hincd;
-		sql+=" select HINNM from PrintMeijin.dbo.M_SYOHIN where HINCD='"+hincd+"'";
+		sql+=" select HINNM from dbo.M_SYOHIN where HINCD='"+hincd+"'";
 
 		var kekka=httpresp(null,SEVER,sql,DB,true);
 		if(kekka===undefined){
