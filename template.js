@@ -1,3 +1,7 @@
+const SEVER = "http://192.168.0.xxx:8080/";	//<--HttpSqlServerの設置先
+const DB = "Server=192.168.0.xx;database=<<DB名>>";	//<--MS-sqlserverの設置先とDB名
+
+
 //商品コード入力
 
 const SYOHIN={};
@@ -75,9 +79,6 @@ SYOHIN["CLASS"] = class {
 		toNode.value=ftomNode.value;
 	}
 	hincd_change(st,hincd){
-		const SEVER = "http://192.168.0.xxx:8080/";	//<--HttpSqlServerの設置先
-		const DB = "Server=192.168.0.xx;database=<<DB名>>";	//<--MS-sqlserverの設置先とDB名
-
 		let nig=new NIGHTER();
 		let sql="";
 		hincd=nig.convNumeric(hincd);
@@ -91,6 +92,7 @@ SYOHIN["CLASS"] = class {
 		}else{
 			tmp.getBrotherNode(st,"hinname").value=kekka[0][1];
 		}
+		nig=null;
 	}
 	
 	btn1_click(){
@@ -147,9 +149,10 @@ TOKUI["CLASS"] = class {
 	}
 */
 	hincd_change(st,hincd){
-		const SEVER = "http://192.168.0.xxx:8080/";	//<--HttpSqlServerの設置先
-		const DB = "Server=192.168.0.xx;database=<<DB名>>";	//<--MS-sqlserverの設置先とDB名
-	let sql="";
+		let nig=new NIGHTER();
+		let sql="";
+		hincd=nig.convNumeric(hincd);
+		this.node.querySelector("#hincd").value=hincd;
 		sql+=" select HINNM from dbo.M_SYOHIN where HINCD='"+hincd+"'";
 
 		var kekka=httpresp(null,SEVER,sql,DB,true);
@@ -159,6 +162,7 @@ TOKUI["CLASS"] = class {
 		}else{
 			tmp.getBrotherNode(st,"hinname").value=kekka[0][1];
 		}
+		nig=null;
 	}
 	btn1_click(st,btn1){
 		alert(btn1);
