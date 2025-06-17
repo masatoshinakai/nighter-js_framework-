@@ -1,0 +1,20 @@
+#
+# DLL ファイルをビルドするための最も基本的なメイク・ファイル
+#
+TARGETOS = WINNT
+APPVER = 4.0
+
+!include <win32.mak>
+
+
+all : cap_dll.dll cap_dll.lib cap_dll.exp
+
+cap_dll.obj : cap_dll.c
+    $(cc) $(cdebug) $(cflags) $(cvarsdll) cap_dll.c
+
+cap_dll.lib cap_dll.exp : cap_dll.obj cap_dll.def
+    $(implib) -machine:$(CPU) -def:cap_dll.def -out:cap_dll.lib cap_dll.obj
+
+cap_dll.dll : cap_dll.obj cap_dll.exp
+    $(link) $(ldebug) $(dlllflags) -out:cap_dll.dll \
+            cap_dll.exp cap_dll.obj $(conlibsdll) gdi32.lib user32.lib kernel32.lib winuser.lib
