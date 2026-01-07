@@ -33,10 +33,11 @@ public class HttpSqlServer implements HttpHandler {
 	private static final int port = 8080;
 
 //MS-SQLSERVERの実行環境
-	private static String SQLSRV="192.168.0.xxx";
-	private static String DBNAME="xxxxxxx";
-	private static String USER="xxxxx";
-	private static String PASSWD="xxxxx";
+	private static String SQLSRV="LS230082\\SQLEXPRESS";
+//	private static String SQLSRV="LS230082:1433";
+	private static String DBNAME="nighterDB";
+	private static String USER="testuser";
+	private static String PASSWD="testuser";
 
 	public static void main(String[] args) throws IOException {
 
@@ -73,6 +74,7 @@ public class HttpSqlServer implements HttpHandler {
 				InputStreamReader isr=new InputStreamReader(ex.getRequestBody(),"utf-8");
 				BufferedReader br = new BufferedReader(isr);
 				String wk1 = br.readLine();
+
 				Map<String, String> param=queryToMap(wk1);
 				String wk="";
 				String[] strurlA = new String[100];
@@ -173,7 +175,8 @@ public class HttpSqlServer implements HttpHandler {
 		Statement stmt=null;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		    connectionUrl = "jdbc:sqlserver://"+srvname+";databaseName="+dbname+";user="+USER+";password="+PASSWD;
+//			connectionUrl = "jdbc:sqlserver://"+srvname+";databaseName="+dbname+";user="+USER+";password="+PASSWD;
+			connectionUrl = "jdbc:sqlserver://"+srvname+";databaseName="+dbname+";user="+USER+";password="+PASSWD+";encrypt=true;trustServerCertificate=true";
 			con = DriverManager.getConnection(connectionUrl); 
 
 			stmt = con.createStatement();

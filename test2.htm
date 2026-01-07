@@ -9,14 +9,14 @@
 	.container {
 		font-size:large;
 		display: grid;
-		grid-template-columns: 0.3fr 1.8fr 1fr;
+		grid-template-columns: 0.33fr 0.33fr 0.34+-fr;
 		grid-template-rows: 1fr 1fr 1fr;
 		gap: 7px 7px;
 		grid-auto-flow: row;
 		grid-template-areas:
 			"a b c"
-			"a . ."
-			"a . .";
+			"d e  f"
+			"g h  i";
 	}
 }
 @media screen and (max-width:480px) { 
@@ -41,15 +41,33 @@
 }
 </style>
 <script language="javascript">
-let tmp=new NIGHTER();
-let a=[];
-let b=[];
-let c;
 const start=()=>{
+	let tmp=new NIGHTER();
+	let a=[];
+	let b=[];
+	let d=[];
+	let c;
+	const GridStyle=[[
+		"border:solid 2px BLACK;width:100px;background-color:lightGray;text-align:center;"
+		,"border:solid 2px BLACK;width:150px;background-color:lightGray;text-align:center;"
+	]
+	,[
+		"border:solid 2px BLACK;text-align:right;"
+		,"border:solid 2px BLACK;text-align:left;"
+	]];
+
+
 //デザインされた配置にあるDIV要素にテンプレートを付与する
-	for(let i=0;i<5;i++){
+	for(let i=0;i<2;i++){
 		a.push(tmp.import_template(SYOHIN,{"location":"A1"}));
+
+//$をノード名の前につけることでそのノードの内容を取得／設定する
 		a[a.length-1].$hincd("TEST"+(a.length-1));
+
+//表をテンプレートに組み込む方法
+//$$をノード名の前につけることでそのノードを取得する
+		let ele1=tmp.createGrid({"STYLE":GridStyle,"SQL":"select SYOCD,SYOMN from dbo.M_SYOHIN"});
+		a[a.length-1].$$hinlst().appendChild(ele1);
 	}
 	for(let i=0;i<2;i++){
 		b.push(tmp.import_template(TOKUI,{"location":"A2"}));
@@ -74,15 +92,50 @@ console.log(c.$tokcd());
 		c["class"].getHinname(c[0],this.value);
 	});
 */
-}
+//表の描画	
+	tmp.import_template(SYOHIN_GRID,{"location":"A4","template":"syohin_grid"});
+//データフォーマット
+/*
+	const data=[
+			 [{h:1030,t:"data112345678"},{h:2010,t:"data2"},{h:1020,t:"data3"},{h:1010,t:"data4"},{h:2020,t:"data5"}]
+			,[{h:1510,t:"data1"},{h:1015,t:"data2"},{h:2010,t:"data3"},{h:1520,t:"data4"},{h:1025,t:"data5"}]
+			,[{h:2015,t:"data1"},{h:2020,t:"data2"},{h:1025,t:"data3"},{h:1015,t:"data4"},{h:2020,t:"data5"}]
+			];
+*/
+
+//グラフの描画
+//sqlでグラフデータを取得する
+	let data=tmp.sql2data("select * from GraphData;",{h:"value",t:"code",c:"color",k:"key"});
+
+/*
+=====データフォーマット=====
+	const data=[
+			 [{h:1030,t:"data112345678"},{h:2010,t:"data2"},{h:1020,t:"data3"},{h:1010,t:"data4"},{h:2020,t:"data5"}]
+			,[{h:1510,t:"data1"},{h:1015,t:"data2"},{h:2010,t:"data3"},{h:1520,t:"data4"},{h:1025,t:"data5"}]
+			,[{h:2015,t:"data1"},{h:2020,t:"data2"},{h:1025,t:"data3"},{h:1015,t:"data4"},{h:2020,t:"data5"}]
+			];
+*/
+
+	tmp.makeStackBarGraph(document.getElementById("A6"),data,{seps:5,titles:"積上げ棒グラフ サンプル",tooltips:"on",meds_max:10000});
+	tmp.makeBarGraph(document.getElementById("A7"),data[0],{seps:2,titles:"シンプル棒グラフ サンプル",tooltips:"on",meds_max:5000});
+	tmp.makeStepBarGraph(document.getElementById("A8"),data[0],{titles:"階段グラフ サンプル",tooltips:"off",seps:0,meds_max:8000});
+
+
+}		
 
 </script>
 </head>
 <body onload="start();">
 <div class="container">
-  <div id="A1" style="border:solid 1px green; grid-area:a;"></div>
-  <div id="A2" style="border:solid 1px red; grid-area:b;"></div>
-  <div id="A3" style="border:solid 1px blue; grid-area:c;"></div>
+  <div id="A1" style="border:solid 1px green; grid-area:c;"></div>
+  <div id="A2" style="border:solid 1px red; grid-area:a;"></div>
+  <div id="A3" style="border:solid 1px blue; grid-area:b;"></div>
+  <div id="A4" style="border:solid 1px pink; grid-area:d;"></div>
+  <div id="A5" style="border:solid 1px pink; grid-area:e;"></div>
+  <div id="A6" style="border:solid 1px pink; grid-area:g;"></div>
+  <div id="A7" style="border:solid 1px pink; grid-area:h;"></div>
+  <div id="A8" style="border:solid 1px pink; grid-area:i;"></div>
+  
 </div>
 </body>
 </html>
