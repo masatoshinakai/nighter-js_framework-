@@ -77,12 +77,12 @@ SYOHIN["CLASS"] = class {
 
 		var kekka=httpresp(null,SEVER,sql,DB,true);
 		if(kekka===undefined){
-			tmp.getBrotherNode(st,"hinname").value="";
+			nig.getBrotherNode(st,"hinname").value="";
 			alert("品番が存在しません");
 		}else{
-			tmp.getBrotherNode(st,"hinname").value=kekka[0][1];
-			tmp.getBrotherNode(st,"hinlst").innerHTML="";
-			tmp.getBrotherNode(st,"hinlst").appendChild(tmp.createGrid({"STYLE":GridStyle,"SQL":"select SYOCD,SYOMN from dbo.M_SYOHIN where HINCD='" + hincd+"'"}));
+			nig.getBrotherNode(st,"hinname").value=kekka[0][1];
+			nig.getBrotherNode(st,"hinlst").innerHTML="";
+			nig.getBrotherNode(st,"hinlst").appendChild(nig.createGrid({"STYLE":GridStyle,"SQL":"select SYOCD,SYOMN from dbo.M_SYOHIN where HINCD='" + hincd+"'"}));
 
 		}
 		nig=null;
@@ -153,10 +153,10 @@ TOKUI["CLASS"] = class {
 
 		var kekka=httpresp(null,SEVER,sql,DB,true);
 		if(kekka===undefined){
-			tmp.getBrotherNode(st,"hinname").value="";
+			nig.getBrotherNode(st,"hinname").value="";
 			alert("品番が存在しません");
 		}else{
-			tmp.getBrotherNode(st,"hinname").value=kekka[0][1];
+			nig.getBrotherNode(st,"hinname").value=kekka[0][1];
 		}
 		nig=null;
 	}
@@ -169,10 +169,10 @@ TOKUI["CLASS"] = class {
 
 		var kekka=httpresp(null,SEVER,sql,DB,true);
 		if(kekka===undefined){
-			tmp.getBrotherNode(st,"tokname").value="";
+			nig.getBrotherNode(st,"tokname").value="";
 			alert("得意先が存在しません");
 		}else{
-			tmp.getBrotherNode(st,"tokname").value=kekka[0][1];
+			nig.getBrotherNode(st,"tokname").value=kekka[0][1];
 		}
 		nig=null;
 	}
